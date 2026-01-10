@@ -6,3 +6,14 @@
 //
 
 import Foundation
+
+@Observable
+class ViewModel {
+    enum FetchStatus {
+        case notStarted
+        case fetching
+        case success
+        case failed(underlyingError: Error)
+    }
+    private(set) var homeStatus: FetchStatus = .notStarted
+}
