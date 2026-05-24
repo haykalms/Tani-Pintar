@@ -9,10 +9,21 @@ import SwiftUI
 
 struct BerandaView: View {
     var heroTestTitle=Constants.testTitleURL
+    let viewModel=ViewModel()
     
     var body: some View {
         GeometryReader { geo in
-            ScrollView {
+            ScrollView(.vertical) {
+                switch viewModel.homeStatus {
+                case .notStarted:
+                    EmptyView()
+                case .fetching:
+                    ProgressView()
+                case .success:
+                    Text("")
+                case .failed(let error):
+                    Text("Error: \(error)")
+                }
                 LazyVStack {
                     AsyncImage(url: URL(string: heroTestTitle)){ image in
                         image
